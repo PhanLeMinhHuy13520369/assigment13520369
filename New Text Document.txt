@@ -1,0 +1,56 @@
+PART 1
+1. The data categories:
+	id, title, company, date, location, area, classification, subclassification, requirement, full describe, lowest salary, highest salary, job  type
+   features of review data that i'm going to use:
+	date, highest salary, lowest salary.
+   feature of product data that i'm going to use:
+	title, company, location, area, requirement.
+   dataset that i'm going to use:
+	Company(companyID, jobID, companyNAME,companyREQUIREMENT, companyCLASSIFICATION, HIGESTSALARY, LOWESTSALARY)
+	Location(locationID, companyID, Location, Area)
+2. Load data to PANDAS:
+	capture the data in file location
+	use "import pandas as pd df = pd.read_exel (r'<data in file location>) print (df)"
+   how to normalize data:
+	adjust/synchronize scale, range, as one unit in the given data
+	remove unessesary data
+   how to clean data: 
+	adjust the data into one unique format
+	deal with missing/error data
+	caution with inconsistent/ malicious data
+3. Expectation of the outcome:
+	located the suitable individuals for the company's given requirement in the shorest distances (nearest location) based on the database of the permanent residence provided by the local governer
+PART 2
+1. 
+	job (jobID, sectorID, companyID, title, classification, subclassification, rangesalary[highestsalary-lowestsalary])
+	sector (sectorID, jobID, location, area)
+2. 
+	select j.jobID, j.title, s.jobID, j.rangesalary, s.location
+	from job j, sector s
+	where j.jobID = s.jobID
+	group by j.rangesalary
+
+3.
+	select s.location, j.rangesalary, c.companyREQUIREMENT
+	from job j, sector s, company c
+	where j.jobID = s.jobID, j.jobID = c.jobID
+	group by j.rangesalary
+4.
+	declare JOBNUMBER, Location, skill
+	set skill = (select j.classification from job j) as sKill
+	set Location = (select s.location from sector s) as lOcation
+	set JOBNUMBER = (select count (j.jobID=s.jobID) from job j, sector s) as jobNumber
+	from job j, sector s
+	where j.jobID = s.jobID
+
+
+	
+   
+
+
+	
+
+
+	
+
+	
